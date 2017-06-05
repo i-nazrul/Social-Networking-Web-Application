@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.Users" table="users" catalog="socialsite" optimistic-lock="version">
+        <id name="userId" type="java.lang.Long">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="firstName" length="15" not-null="true" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="15" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="dob" type="string">
+            <column name="dob" length="45" not-null="true" />
+        </property>
+        <property name="sex" type="string">
+            <column name="sex" length="6" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="conversationsForUserIdFrom" table="conversation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_from" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Conversation" />
+        </set>
+        <set name="conversationsForUserIdTo" table="conversation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_to" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Conversation" />
+        </set>
+        <set name="photoAlbums" table="photo_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.PhotoAlbum" />
+        </set>
+        <set name="coverPhotoAlbums" table="cover_photo_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.CoverPhotoAlbum" />
+        </set>
+        <set name="photos" table="photo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Photo" />
+        </set>
+        <set name="commentLikeses" table="comment_likes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.CommentLikes" />
+        </set>
+        <set name="posts" table="post" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Post" />
+        </set>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Comment" />
+        </set>
+        <set name="wallPhotoAlbums" table="wall_photo_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.WallPhotoAlbum" />
+        </set>
+        <set name="profilePhotoAlbums" table="profile_photo_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.ProfilePhotoAlbum" />
+        </set>
+        <set name="videos" table="video" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Video" />
+        </set>
+        <set name="conversationRepliesForUserIdFrom" table="conversation_reply" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_from" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.ConversationReply" />
+        </set>
+        <set name="conversationRepliesForUserIdTo" table="conversation_reply" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_to" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.ConversationReply" />
+        </set>
+        <set name="shares" table="share" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Share" />
+        </set>
+        <set name="videoAlbums" table="video_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.VideoAlbum" />
+        </set>
+        <set name="friendRequestsForUserIdFrom" table="friend_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_from" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.FriendRequest" />
+        </set>
+        <set name="userProfiles" table="user_profile" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.UserProfile" />
+        </set>
+        <set name="friendsForUserId1" table="friend" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_1" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Friend" />
+        </set>
+        <set name="friendsForUserId2" table="friend" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_2" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Friend" />
+        </set>
+        <set name="postLikeses" table="post_likes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.PostLikes" />
+        </set>
+        <set name="friendRequestsForUserIdTo" table="friend_request" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_id_to" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.FriendRequest" />
+        </set>
+    </class>
+</hibernate-mapping>

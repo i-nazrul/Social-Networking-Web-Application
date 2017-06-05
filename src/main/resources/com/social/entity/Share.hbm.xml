@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.Share" table="share" catalog="socialsite" optimistic-lock="version">
+        <id name="shareId" type="java.lang.Long">
+            <column name="share_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="post" class="com.social.entity.Post" fetch="select">
+            <column name="post_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="com.social.entity.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="shareText" type="string">
+            <column name="share_text" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

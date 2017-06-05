@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.UserProfile" table="user_profile" catalog="socialsite" optimistic-lock="version">
+        <id name="profileId" type="java.lang.Long">
+            <column name="profile_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="com.social.entity.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="address" type="string">
+            <column name="address" length="200" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="45" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="45" />
+        </property>
+        <property name="school" type="string">
+            <column name="school" length="100" />
+        </property>
+        <property name="college" type="string">
+            <column name="college" length="100" />
+        </property>
+        <property name="varsity" type="string">
+            <column name="varsity" length="100" />
+        </property>
+        <property name="degree" type="string">
+            <column name="degree" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

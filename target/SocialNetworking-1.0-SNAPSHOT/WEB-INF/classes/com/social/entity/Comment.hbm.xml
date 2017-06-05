@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.Comment" table="comment" catalog="socialsite" optimistic-lock="version">
+        <id name="commentId" type="java.lang.Long">
+            <column name="comment_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="post" class="com.social.entity.Post" fetch="select">
+            <column name="post_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="com.social.entity.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="commentTime" type="timestamp">
+            <column name="comment_time" length="19" not-null="true" />
+        </property>
+        <property name="commentContent" type="string">
+            <column name="comment_content" not-null="true" />
+        </property>
+        <property name="commentParentId" type="int">
+            <column name="comment_parent_id" not-null="true" />
+        </property>
+        <set name="commentLikeses" table="comment_likes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="comment_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.CommentLikes" />
+        </set>
+    </class>
+</hibernate-mapping>

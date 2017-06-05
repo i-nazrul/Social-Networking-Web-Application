@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.Post" table="post" catalog="socialsite" optimistic-lock="version">
+        <id name="postId" type="java.lang.Long">
+            <column name="post_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="com.social.entity.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="postTitle" type="string">
+            <column name="post_title" length="45" not-null="true" />
+        </property>
+        <property name="postContext" type="string">
+            <column name="post_context" not-null="true" />
+        </property>
+        <property name="postType" type="string">
+            <column name="post_type" length="45" not-null="true" />
+        </property>
+        <property name="postTime" type="timestamp">
+            <column name="post_time" length="19" not-null="true" />
+        </property>
+        <property name="tags" type="string">
+            <column name="tags" length="100" not-null="true" />
+        </property>
+        <set name="shares" table="share" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Share" />
+        </set>
+        <set name="comments" table="comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.Comment" />
+        </set>
+        <set name="postLikeses" table="post_likes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.PostLikes" />
+        </set>
+        <set name="wallPhotoAlbums" table="wall_photo_album" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="post_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.WallPhotoAlbum" />
+        </set>
+    </class>
+</hibernate-mapping>

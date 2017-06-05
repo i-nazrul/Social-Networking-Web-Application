@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.Conversation" table="conversation" catalog="socialsite" optimistic-lock="version">
+        <id name="conversationId" type="java.lang.Long">
+            <column name="conversation_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usersByUserIdFrom" class="com.social.entity.Users" fetch="select">
+            <column name="user_id_from" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usersByUserIdTo" class="com.social.entity.Users" fetch="select">
+            <column name="user_id_to" not-null="true" />
+        </many-to-one>
+        <property name="ip" type="string">
+            <column name="ip" length="15" not-null="true" />
+        </property>
+        <property name="time" type="timestamp">
+            <column name="time" length="19" not-null="true" />
+        </property>
+        <property name="text" type="string">
+            <column name="text" not-null="true" />
+        </property>
+        <property name="status" type="int">
+            <column name="status" not-null="true" />
+        </property>
+        <set name="conversationReplies" table="conversation_reply" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="conversation_id" not-null="true" />
+            </key>
+            <one-to-many class="com.social.entity.ConversationReply" />
+        </set>
+    </class>
+</hibernate-mapping>

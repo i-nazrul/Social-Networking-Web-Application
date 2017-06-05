@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 24, 2017 9:29:40 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.social.entity.PhotoAlbum" table="photo_album" catalog="socialsite" optimistic-lock="version">
+        <id name="photoAlbumId" type="java.lang.Long">
+            <column name="photo_album_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="photo" class="com.social.entity.Photo" fetch="select">
+            <column name="photo_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="com.social.entity.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="addedDate" type="date">
+            <column name="added_date" length="10" not-null="true" />
+        </property>
+        <property name="desricption" type="string">
+            <column name="desricption" length="16777215" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="45" />
+        </property>
+        <property name="modifiedDate" type="date">
+            <column name="modified_date" length="10" not-null="true" />
+        </property>
+        <property name="albumTitle" type="string">
+            <column name="album_title" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
