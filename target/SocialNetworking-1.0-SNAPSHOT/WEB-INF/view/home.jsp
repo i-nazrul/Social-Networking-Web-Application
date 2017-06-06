@@ -49,7 +49,7 @@
                       <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="">
                   </a>
                   
-                  <h1>${firstName} ${lastName}</h1>
+                  <h1>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h1>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">

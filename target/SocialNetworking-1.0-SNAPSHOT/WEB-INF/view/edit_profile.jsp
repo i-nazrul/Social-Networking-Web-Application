@@ -89,31 +89,32 @@
                                     <form:form method="post" action="${action}" commandName="user">
                                         
                                         <%--<c:if test="${!empty user.userId}">--%>
-                                            <input class="form-control" type="text" path="userId">
+                                            <input class="form-control" type="hidden" name="userId" path="userId" value="${sessionScope.u.userId}">
                                         <%--</c:if>--%>
                                             <h3><i class="fa fa-square"></i> Basic Information</h3>
                                             <p class="data-row">
-                                                <input type="text" placeholder="First Name" name="firstName" path="firstName" value=""/>
-                                                <span class="data-value">${firstName}</span>
+                                                <input type="text" placeholder="First Name" name="firstName" path="firstName" value="${sessionScope.u.firstName}"/>
+                                                <span class="data-value"></span>
                                             </p>
                                             <p class="data-row">
-                                                <input type="text" placeholder="Last Name" name="lastName" path="lastName" value=""/>
-                                                <span class="data-value">${lastName}</span>
+                                                <input type="text" placeholder="Last Name" name="lastName" path="lastName" value="${sessionScope.u.lastName}"/>
+                                                <span class="data-value"></span>
                                             </p>
                                             <p class="data-row">
-                                                <input type="text" placeholder="Email" name="email" path="email" value=""/>
-                                                <span class="data-value">${email}</span>
+                                                <input type="email" placeholder="Email" name="email" path="email" value="${sessionScope.u.email}"/>
+                                                <span class="data-value"></span>
                                             </p>
                                             <p class="data-row">
-                                                <input type="text" placeholder="Password" name="password" path="password" value=""/>
-                                                <span class="data-value">${password}</span>
+                                                <input type="text" placeholder="Password" name="password" path="password" value="${sessionScope.u.password}"/>
+                                                <span class="data-value"></span>
                                             </p>
                                             <p class="data-row">
                                                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" style="width: 95px; margin-right:5px; float: left" name="day" path="day">
-                                                <option selected="">Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+                                                <option value="${sessionScope.u.day}">${sessionScope.u.day}</option><option>Day</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
                                             </select>
                                             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" style="width: 95px; margin-right:5px; float: left" name="month" path="month">
-                                                <option selected="">Month</option>
+                                                <option value="${sessionScope.u.month}">${sessionScope.u.month}</option>
+                                                <option>Month</option>
                                                 <option value="Jan">Jan</option>
                                                 <option value="Feb">Feb</option>
                                                 <option value="Mar">Mar</option>
@@ -128,18 +129,19 @@
                                                 <option value="Dec">Dec</option>
                                             </select>
                                             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" style="width: 94px; float: left" name="year" path="year">
-                                                <option selected="">Year</option><option value="2017">2017</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option>
+                                                <option value="${sessionScope.u.year}">${sessionScope.u.year}</option><option>Year</option><option value="2017">2017</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option>
 
-                                            </select>${day} ${month} ${year}
+                                            </select>
                                             </p>
                                             <br><br>
                                             <p class="data-row">
                                                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0" style="width: 295px;" name="sex" path="sex">
-                                                <option selected="">Sex</option>
+                                                <option value="${sessionScope.u.sex}">${sessionScope.u.sex}</option>
+                                                    <option>Sex</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </select>
-                                                <span class="data-value">${sex}</span>
+                                                <span class="data-value"></span>
                                             </p>
                                             <p class="data-row">
                                                 <%--<c:if test="${! empty userId}">--%>
