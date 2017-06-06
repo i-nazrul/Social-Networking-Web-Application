@@ -85,7 +85,7 @@
                                 <div class="col-md-9">
                                     <div class="user-info-right">
                                         <div class="basic-info">
-                                            <c:url var="action" value="/user/update"></c:url>
+                                            <c:url var="action" value="/update"></c:url>
                                     <form:form method="post" action="${action}" commandName="user">
                                         
                                         <%--<c:if test="${!empty user.userId}">--%>
@@ -418,6 +418,7 @@
                                     <a href="file_manager">File manager</a>
                                     <a href="people_directory">People directory</a>
                                     <a href="grid_posts">Grid posts</a>
+                                    <a href="/SocialNetworking/logout">Log Out</a>
                                 </div>
                             </div>
                         </li>

@@ -348,6 +348,7 @@
                                     <a href="file_manager">File manager</a>
                                     <a href="people_directory">People directory</a>
                                     <a href="grid_posts">Grid posts</a>
+                                    <a href="/SocialNetworking/logout">Log Out</a>
                                 </div>
                             </div>
                         </li>

@@ -95,7 +95,7 @@
               <div class="avatar">
                 <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="people">
               </div>
-              <div class="name"><a href="#">John Breakgrow jr.</a></div>
+              <div class="name"><a href="#">${sessionScope.u.firstName} ${sessionScope.u.lastName}</a></div>
               <ul class="cover-nav">
                 <li class="active"><a href="profile"><i class="fa fa-fw fa-bars"></i> Timeline</a></li>
                 <li><a href="about"><i class="fa fa-fw fa-user"></i> About</a></li>
@@ -684,6 +684,7 @@
                                     <a href="file_manager">File manager</a>
                                     <a href="people_directory">People directory</a>
                                     <a href="grid_posts">Grid posts</a>
+                                    <a href="/SocialNetworking/logout">Log Out</a>
                                 </div>
                             </div>
                         </li>

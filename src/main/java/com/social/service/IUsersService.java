@@ -16,7 +16,7 @@ public interface IUsersService {
 
     public void addUser(Users user);
 
-    public void updateUser(Users user);
+    public Users updateUser(Users user);
 
     public List<Users> listUser();
 

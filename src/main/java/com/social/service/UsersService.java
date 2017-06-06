@@ -34,8 +34,8 @@ public class UsersService implements IUsersService {
 
     @Override
     @Transactional
-    public void updateUser(Users user) {
-        userDao.updateUser(new Users(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(),
+    public Users updateUser(Users user) {
+        return userDao.updateUser(new Users(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(),
                 user.getPassword(), user.getDay(), user.getMonth(), user.getYear(), user.getSex(), 1, new Date() ));
     }
 

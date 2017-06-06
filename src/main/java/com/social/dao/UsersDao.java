@@ -31,8 +31,9 @@ public class UsersDao implements IUsersDao {
     }
 
     @Override
-    public void updateUser(Users user) {
+    public Users updateUser(Users user) {
         sessionFactory.getCurrentSession().update(user);
+        return loginUser(user.getEmail(), user.getPassword());
     }
 
     @Override

@@ -70,4 +70,11 @@ public class LoginController {
          session.setAttribute("u", user);
         return new ModelAndView("home", "user-entity", user);
     }
+    
+    @RequestMapping(value = "/logout", method=RequestMethod.GET)
+      public String logout(HttpSession session) {
+        session.invalidate();
+        System.out.println("session.invalidate()");
+        return "redirect:/";
+      }
 }
