@@ -13,7 +13,8 @@ import java.util.List;
  * @author B3
  */
 public interface PostDaoInterface {
-   public void addPost(Post post);
+
+    public void addPost(Post post);
 
     public void updatePost(Post post);
 
@@ -22,5 +23,5 @@ public interface PostDaoInterface {
     public Post getPostById(Integer Id);
 
     public void removePost(Integer Id);
-    
+
 }
