@@ -5,41 +5,40 @@
  */
 package com.social.dao;
 
-import com.social.entity.Post;
+import com.social.entity.ProfilePhotoAlbum;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author B3
+ * @author B1
  */
-public class PostDao implements PostDaoInterface{
+public class ProfilePhotoAlbumDao implements ProfilePhotoAlbumDaoInterface{
     
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void addPost(Post post) {
+    public void addProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum) {
     }
 
     @Override
-    public void updatePost(Post post) {
+    public void updateProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum) {
     }
 
     @Override
-    public List<Post> listPost() {
+    public List<ProfilePhotoAlbum> listProfilePhotoAlbum() {
         return null;
     }
 
     @Override
-    public Post getPostById(Integer Id) {
+    public ProfilePhotoAlbum getProfilePhotoAlbumById(Integer Id) {
         return null;
     }
 
     @Override
-    public void removePost(Integer Id) {
+    public void removeProfilePhotoAlbum(Integer Id) {
     }
-
     
 }

@@ -3,43 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.social.dao;
+package com.social.service;
 
-import com.social.entity.Post;
+import com.social.dao.PhotoDaoInterface;
+import com.social.entity.Photo;
 import java.util.List;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author B3
+ * @author B1
  */
-public class PostDao implements PostDaoInterface{
-    
+public class PhotoService implements PhotoServiceInterface {
+
     @Autowired
-    private SessionFactory sessionFactory;
+    private PhotoDaoInterface photoDaoInt;
 
     @Override
-    public void addPost(Post post) {
+    public void addPhoto(Photo photo) {
     }
 
     @Override
-    public void updatePost(Post post) {
+    public void updatePhoto(Photo photo) {
     }
 
     @Override
-    public List<Post> listPost() {
+    public List<Photo> listPhoto() {
         return null;
     }
 
     @Override
-    public Post getPostById(Integer Id) {
+    public Photo getPhotoById(Integer Id) {
         return null;
     }
 
     @Override
-    public void removePost(Integer Id) {
+    public void removePhoto(Integer Id) {
     }
 
-    
 }
