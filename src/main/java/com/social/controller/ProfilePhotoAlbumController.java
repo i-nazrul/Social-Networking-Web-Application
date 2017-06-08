@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("user-entity")
 public class ProfilePhotoAlbumController {
     
-    @Autowired
-    private ProfilePhotoAlbumServiceInterface profilePhotoAlbmServInt;
+//    @Autowired
+//    private ProfilePhotoAlbumServiceInterface profilePhotoAlbmServInt;
     
     
     @RequestMapping(value = "/addProfilePic", method = RequestMethod.POST)
     public String addBook(@ModelAttribute("ppa") ProfilePhotoAlbum ppa, BindingResult result) {
       
-            profilePhotoAlbmServInt.addProfilePhotoAlbum(ppa);
+//            profilePhotoAlbmServInt.addProfilePhotoAlbum(ppa);
        
         return "redirect:/";
     }

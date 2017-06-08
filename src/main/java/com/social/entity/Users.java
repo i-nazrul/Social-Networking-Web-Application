@@ -42,15 +42,7 @@ public class Users implements java.io.Serializable {
     private int status;
     @Column(name = "regDate", nullable = false)
     private Date regDate;
-    ProfilePhotoAlbum ppa;
-
-    public ProfilePhotoAlbum getPpa() {
-        return ppa;
-    }
-
-    public void setPpa(ProfilePhotoAlbum ppa) {
-        this.ppa = ppa;
-    }
+    
     
 
     public Users() {

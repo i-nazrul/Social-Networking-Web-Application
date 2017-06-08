@@ -62,15 +62,16 @@
                                 <div class="col-md-3">
                                     <div class="user-info-left">
                                         <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="Profile Picture">
-                                        <h2>John Breakgrow jr.</h2>
+                                        <h2>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h2>
                                         <div class="contact">
                                              <c:url var="action" value="/update"></c:url>
                                             <form:form method="post" action="${action}" commandName="user">
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
                                                     Change Avatar <input type="file" multiple="" name="file_link" path="file_link">
-                                                    <input class="btn btn-azure" type="submit" value="Photo Update"/>
+                                                    
                                                 </span>
+                                                <input class="btn btn-azure" type="submit" value="Photo Update"/>
                                             </p>
                                             </form:form>
                                             <p>
@@ -149,7 +150,7 @@
                                             </p>
                                             <p class="data-row">
                                                 <%--<c:if test="${! empty userId}">--%>
-                                                <input class="btn btn-azure" type="submit" value="Update"/><a href="/SocialNetworking/edit/${user.userId}">Edit</a>
+                                                <input class="btn btn-azure" type="submit" value="Update"/>
                                             <%--</c:if>--%>
                                             </p>
                                             
@@ -157,11 +158,11 @@
                                         </div>
                                     
                                      
-                                        <div class="about">
+<!--                                        <div class="about">
                                             <h3><i class="fa fa-square"></i> About Me</h3>
                                             <p>Dramatically facilitate proactive solutions whereas professional intellectual capital. Holisticly utilize competitive e-markets through intermandated meta-services. Objectively.</p>
                                             <p>Monotonectally foster future-proof infomediaries before principle-centered interfaces. Assertively recaptiualize cutting-edge web services rather than emerging "outside the box" thinking. Phosfluorescently cultivate resource maximizing technologies and user-centric convergence. Completely underwhelm cross functional innovation vis-a-vis.</p>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
