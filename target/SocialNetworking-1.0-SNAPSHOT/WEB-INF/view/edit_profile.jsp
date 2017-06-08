@@ -64,11 +64,15 @@
                                         <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="Profile Picture">
                                         <h2>John Breakgrow jr.</h2>
                                         <div class="contact">
+                                             <c:url var="action" value="/update"></c:url>
+                                            <form:form method="post" action="${action}" commandName="user">
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
-                                                    Change Avatar <input type="file" multiple="">
+                                                    Change Avatar <input type="file" multiple="" name="file_link" path="file_link">
+                                                    <input class="btn btn-azure" type="submit" value="Photo Update"/>
                                                 </span>
                                             </p>
+                                            </form:form>
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
                                                     Change Cover <input type="file" multiple="">
