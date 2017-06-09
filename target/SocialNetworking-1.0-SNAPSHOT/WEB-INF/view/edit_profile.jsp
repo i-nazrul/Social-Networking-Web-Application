@@ -61,19 +61,20 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="user-info-left">
-                                        <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="Profile Picture">
+                                        <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${pic}" alt="Profile Picture">
                                         <h2>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h2>
                                         <div class="contact">
-                                             <c:url var="action" value="/update"></c:url>
-                                            <form:form method="post" action="${action}" commandName="user">
+                                             
+                                            <form method="POST" enctype="multipart/form-data" action="uploadPic/${sessionScope.u.userId}">
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
-                                                    Change Avatar <input type="file" multiple="" name="file_link" path="file_link">
+                                                    <!--<input  type="hidden" name="userId" path="userId" value="${sessionScope.u.userId}">-->
+                                                    Change Avatar <input type="file" name="file_link">
                                                     
                                                 </span>
                                                 <input class="btn btn-azure" type="submit" value="Photo Update"/>
                                             </p>
-                                            </form:form>
+                                            </form>
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
                                                     Change Cover <input type="file" multiple="">

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ProfilePhotoAlbumDaoInterface {
     
-    public void addProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum);
+    public void addProfilePhoto(ProfilePhotoAlbum ppa);
 
     public void updateProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum);
 

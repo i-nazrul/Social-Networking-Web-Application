@@ -298,13 +298,27 @@ CREATE TABLE `post` (
   PRIMARY KEY (`post_id`),
   KEY `post_fk1_idx` (`user_id`),
   CONSTRAINT `post_fk1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `post`
 --
 
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` (`post_id`,`user_id`,`post_title`,`post_context`,`post_type`,`post_time`,`tags`) VALUES 
+ (1,21,'sample','post','text','2017-05-22 12:25:28','n/a'),
+ (2,21,'sample','fdghdfgh','text','2017-05-22 15:44:32','n/a'),
+ (3,21,'sample','new post','text','2017-05-22 15:45:48','n/a'),
+ (4,21,'sample','dfthf','text','2017-05-22 15:47:25','n/a'),
+ (5,21,'sample','porwer','text','2017-05-22 15:48:03','n/a'),
+ (6,21,'sample','dfghdf','text','2017-05-22 15:51:56','n/a'),
+ (7,22,'sample','q','text','2017-05-22 15:52:36','n/a'),
+ (8,22,'sample','rrr','text','2017-05-22 15:53:14','n/a'),
+ (9,22,'sample','jhkhjkh','text','2017-05-22 16:15:53','n/a'),
+ (10,22,'sample','profile','text','2017-05-22 16:22:58','n/a'),
+ (11,21,'sample','dd','text','2017-05-25 16:02:59','n/a'),
+ (12,21,'sample','pp','text','2017-05-25 16:03:26','n/a'),
+ (13,21,'sample','adfewfwdfwf','text','2017-05-26 23:49:01','n/a');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 
 
@@ -425,31 +439,28 @@ CREATE TABLE `users` (
   `year` varchar(4) NOT NULL,
   `sex` varchar(6) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+  `regDate` date NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`user_id`,`firstName`,`lastName`,`email`,`password`,`day`,`month`,`year`,`sex`,`status`) VALUES 
- (1,'dd','fff','ggg','ttt','dd','1','1','gg',1),
- (3,'sdfqw','ww','ww','w','w','2','1','w',0),
- (4,'q','q','q','q','q','1','1','q',1),
- (5,'jkj','jhj','hjihjkh','hgjhj','d','1','1','sdfsd',1),
- (6,'ghjig','q','abu','123','da','1','1','sdfsd',1),
- (7,'sdfqw','r','a','1','da','1','1','sdfsd',1),
- (8,'w','w','w','w','da','1','1','sdfsd',1),
- (9,'sdfasd','asd','asd','asd','1','1','1','sdfsd',1),
- (10,'as','asdasd','asd','asd','1','1','1','sdfsd',1),
- (11,'v','v','v','v','02','mar','1990','v',1),
- (12,'2','2','2','2','02','mar','1990','3',1),
- (13,'3','3','3@ded.dd','3','02','mar','1990','3',1),
- (14,'4','4','4@sdfsd.dfg','4','16','Jan','2001','Male',1),
- (15,'4','4','4@sdfsd.dfg','4','16','Jan','2001','Male',1),
- (16,'5','5','5@sdf.dfg','5','18','Mar','2001','Female',1),
- (17,'6','6','6@dfg.dfg','6','16','App','2002','Male',1);
+INSERT INTO `users` (`user_id`,`firstName`,`lastName`,`email`,`password`,`day`,`month`,`year`,`sex`,`status`,`regDate`) VALUES 
+ (21,'Md','Hridoy','hridoy@yahoo.com','1234','8','App','1991','Male',1,'2017-05-22'),
+ (22,'o','o','asod@dsf.df','o','15','Feb','2002','Male',1,'2017-06-06'),
+ (93,'Arefin','Hossain','arefin@gmail.com','123','17','Mar','2002','Male',1,'2017-05-22'),
+ (94,'Nusrat','Nila','7@fgh.dfg','sdg','2','Mar','2014','Male',1,'2017-05-22'),
+ (95,'Jannat','Jannat','psd@dfg.ghj','sdf','3','Mar','2016','Male',1,'2017-05-22'),
+ (96,'Giash','Uddin','r@ddd.com','sdfsd','4','App','2015','Female',1,'2017-05-22'),
+ (97,'Ibrahim','Sheik','th.badhan@yahoo.com','45645','19','Jan','2000','Male',1,'2017-05-22'),
+ (98,'Almir','Hossain','5@sdfg.hgjk','fgh','18','Feb','2001','Male',1,'2017-05-22'),
+ (100,'c','c','qqpsd@dfg.ghj','cc','18','Feb','2000','Male',1,'2017-05-26'),
+ (101,'x','x','x@x.co','x','18','Feb','2003','Male',1,'2017-06-05'),
+ (102,'asd','asd','asd@dsf.df','dfsad','15','App','2003','Male',1,'2017-06-06');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 

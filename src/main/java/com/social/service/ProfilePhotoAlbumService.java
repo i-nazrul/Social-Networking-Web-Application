@@ -6,21 +6,25 @@
 package com.social.service;
 
 import com.social.dao.PhotoDaoInterface;
+import com.social.dao.ProfilePhotoAlbumDaoInterface;
 import com.social.entity.ProfilePhotoAlbum;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author B1
  */
+@Service
 public class ProfilePhotoAlbumService implements ProfilePhotoAlbumServiceInterface{
     
     @Autowired
-    private PhotoDaoInterface photoDaoInt;
+    private ProfilePhotoAlbumDaoInterface ppadi;
 
     @Override
-    public void addProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum) {
+    public void addProfilePhoto(ProfilePhotoAlbum ppa) {
+        ppadi.addProfilePhoto(ppa);
     }
 
     @Override

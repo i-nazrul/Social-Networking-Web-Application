@@ -7,20 +7,25 @@ package com.social.dao;
 
 import com.social.entity.ProfilePhotoAlbum;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author B1
  */
+@Transactional
+@Repository
 public class ProfilePhotoAlbumDao implements ProfilePhotoAlbumDaoInterface{
     
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public void addProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum) {
+    public void addProfilePhoto(ProfilePhotoAlbum ppa) {
+        sessionFactory.getCurrentSession().save(ppa);
     }
 
     @Override
