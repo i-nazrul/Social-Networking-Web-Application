@@ -18,7 +18,7 @@ public interface ProfilePhotoAlbumServiceInterface {
 
     public void updateProfilePhotoAlbum(ProfilePhotoAlbum profilePhotoAlbum);
 
-    public List<ProfilePhotoAlbum> listProfilePhotoAlbum();
+    public ProfilePhotoAlbum getProfilePhoto(Integer userId);
 
     public ProfilePhotoAlbum getProfilePhotoAlbumById(Integer Id);
 

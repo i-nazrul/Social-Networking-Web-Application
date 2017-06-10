@@ -6,6 +6,7 @@
 package com.social.controller;
 
 import com.social.entity.ProfilePhotoAlbum;
+import com.social.entity.Users;
 import com.social.service.ProfilePhotoAlbumServiceInterface;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -33,16 +34,20 @@ public class ProfilePhotoAlbumController {
     
     @Autowired
     private ProfilePhotoAlbumServiceInterface ppasi;
-    private String databaseDirectory;
     
-    
+    @RequestMapping("/home1")
+    public String listUser(Users u) {
+        
+         ppasi.getProfilePhoto(u.getUserId());
+        return "home";
+    }
     
     @RequestMapping(value = "/uploadPic/{userId}", method = RequestMethod.POST)
     public String upload(@PathVariable("userId") Integer userId, @RequestParam("file_link") MultipartFile file_link, HttpSession session) throws IOException {
       
         
-//        String fileName= file_link.getOriginalFilename();
-//        session.setAttribute("pic", fileName);
+        String fileName= file_link.getOriginalFilename();
+        session.setAttribute("pic", fileName);
 
         InputStream is =  new BufferedInputStream(file_link.getInputStream());
         byte[] bytes = IOUtils.toByteArray(is);

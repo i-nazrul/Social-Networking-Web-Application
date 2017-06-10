@@ -1,4 +1,4 @@
-/*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -32,8 +32,8 @@ public class ProfilePhotoAlbumService implements ProfilePhotoAlbumServiceInterfa
     }
 
     @Override
-    public List<ProfilePhotoAlbum> listProfilePhotoAlbum() {
-        return null;
+    public ProfilePhotoAlbum getProfilePhoto(Integer userId) {
+        return ppadi.getProfilePhoto(userId);
     }
 
     @Override

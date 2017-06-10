@@ -6,8 +6,11 @@
 package com.social.dao;
 
 import com.social.entity.ProfilePhotoAlbum;
+import com.social.entity.Users;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,8 +36,18 @@ public class ProfilePhotoAlbumDao implements ProfilePhotoAlbumDaoInterface{
     }
 
     @Override
-    public List<ProfilePhotoAlbum> listProfilePhotoAlbum() {
-        return null;
+    public ProfilePhotoAlbum getProfilePhoto(Integer userId) {
+        
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM ProfilePhotoAlbum u WHERE u.userId=:userId ");
+
+        query.setInteger("userId", userId);
+        
+        List<ProfilePhotoAlbum> cList = query.list();
+        cList.toString();
+//        System.out.println(cList.size());
+//        System.out.println("Dao");
+        return cList.size() > 0 ? cList.get(0) : null;
     }
 
     @Override
