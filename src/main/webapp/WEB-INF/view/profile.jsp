@@ -93,7 +93,7 @@
             </div>
             <div class="cover-info">
               <div class="avatar">
-                <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="people">
+                <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="people">
               </div>
               <div class="name"><a href="#">${sessionScope.u.firstName} ${sessionScope.u.lastName}</a></div>
               <ul class="cover-nav">

@@ -29,16 +29,15 @@ public class ProfilePhotoAlbum implements java.io.Serializable {
     private Integer userId;
     @Column(name = "added_date", nullable = false, length = 10)
     private Date addedDate;
-    @Column(name = "file_link", nullable = false)
-    @Lob
-    private byte[] fileLink;
+    @Column(name = "file_link", nullable = false, length = 45)
+    private String fileLink;
     @Column(name = "status", nullable = false)
     private int status;
 
-    public ProfilePhotoAlbum() {
+    public ProfilePhotoAlbum() {                                                            
     }
 
-    public ProfilePhotoAlbum(Integer userId, Date addedDate, byte[]  fileLink, int status) {
+    public ProfilePhotoAlbum(Integer userId, Date addedDate, String  fileLink, int status) {
         this.userId = userId;
         this.addedDate = addedDate;
         this.fileLink = fileLink;
@@ -73,11 +72,11 @@ public class ProfilePhotoAlbum implements java.io.Serializable {
         this.addedDate = addedDate;
     }
 
-    public byte[]  getFileLink() {
+    public String  getFileLink() {
         return fileLink;
     }
 
-    public void setFileLink(byte[]  fileLink) {
+    public void setFileLink(String  fileLink) {
         this.fileLink = fileLink;
     }
 

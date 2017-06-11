@@ -46,7 +46,7 @@
               <div class="widget-body">
                 <div class="user-heading round">
                   <a href="#">
-                      <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="">
+                      <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="">
                   </a>
                   
                   <h1>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h1>

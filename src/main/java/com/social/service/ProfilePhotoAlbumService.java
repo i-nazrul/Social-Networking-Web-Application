@@ -23,8 +23,8 @@ public class ProfilePhotoAlbumService implements ProfilePhotoAlbumServiceInterfa
     private ProfilePhotoAlbumDaoInterface ppadi;
 
     @Override
-    public void addProfilePhoto(ProfilePhotoAlbum ppa) {
-        ppadi.addProfilePhoto(ppa);
+    public ProfilePhotoAlbum addProfilePhoto(ProfilePhotoAlbum ppa) {
+       return ppadi.addProfilePhoto(ppa);
     }
 
     @Override

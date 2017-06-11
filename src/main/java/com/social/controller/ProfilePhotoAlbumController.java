@@ -47,14 +47,10 @@ public class ProfilePhotoAlbumController {
       
         
         String fileName= file_link.getOriginalFilename();
-        session.setAttribute("pic", fileName);
 
-        InputStream is =  new BufferedInputStream(file_link.getInputStream());
-        byte[] bytes = IOUtils.toByteArray(is);
-        
-        ProfilePhotoAlbum ppa = new ProfilePhotoAlbum(userId, new Date(), bytes, 1);
-//        System.out.println("Path & userId "+ppa.getUserId() +" "+ppa.getFileLink()+""+ppa.getAddedDate());
-        ppasi.addProfilePhoto(ppa);
+        ProfilePhotoAlbum ppa = new ProfilePhotoAlbum(userId, new Date(), fileName, 1);
+        ppa = ppasi.addProfilePhoto(ppa);
+        session.setAttribute("ppa", ppa);
                    
         return "edit_profile";
     }

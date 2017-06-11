@@ -44,8 +44,8 @@
                       <span class="write" data-toggle="tooltip" data-placement="top" title="" data-original-title="New"></span>
                       <img src="${pageContext.request.contextPath}/resources/img/Cover/nature.jpg" alt="cover" class="cover">
                       <div class="cont">
-                        <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="avatar" class="avatar">
-                        <div class="name"><span class="s-text">John Breakgrow jr.</span></div>
+                        <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="avatar" class="avatar">
+                        <div class="name"><span class="s-text">${sessionScope.u.firstName} ${sessionScope.u.lastName}</span></div>
                       </div>
                     </div>
             

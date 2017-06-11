@@ -27,8 +27,28 @@ public class ProfilePhotoAlbumDao implements ProfilePhotoAlbumDaoInterface{
     private SessionFactory sessionFactory;
 
     @Override
-    public void addProfilePhoto(ProfilePhotoAlbum ppa) {
+    public ProfilePhotoAlbum addProfilePhoto(ProfilePhotoAlbum ppa) {
+        
+        Session session1 = sessionFactory.getCurrentSession();
+        Query query1 = session1.createQuery("UPDATE ProfilePhotoAlbum p SET p.status=:zero Where p.status=:one");
+        query1.setInteger("zero", 0);
+        query1.setInteger("one", 1);
+        query1.executeUpdate();
+        
         sessionFactory.getCurrentSession().save(ppa);
+        Session session2 = sessionFactory.getCurrentSession();
+        Query query2 = session2.createQuery("FROM ProfilePhotoAlbum p WHERE p.userId=:userId and p.status=:status");
+
+        query2.setInteger("userId", 21);
+        query2.setInteger("status", 1);
+
+        List<ProfilePhotoAlbum> cList2 = query2.list();
+        cList2.toString();
+        for(ProfilePhotoAlbum p : cList2){
+            System.out.println("PPA DAO1: "+p.getProfilePhotoId()+" "+p.getUserId()+" "+p.getFileLink()+" "+p.getStatus());
+        }
+        ppa = cList2.get(0);
+        return ppa;
     }
 
     @Override

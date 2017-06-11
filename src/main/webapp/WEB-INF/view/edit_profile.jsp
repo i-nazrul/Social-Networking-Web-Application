@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="user-info-left">
-                                        <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${pic}" alt="Profile Picture">
+                                        <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="Profile Picture">
                                         <h2>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h2>
                                         <div class="contact">
                                              
