@@ -35,7 +35,10 @@
         <link href="${pageContext.request.contextPath}/resources/assets/css/mysearchbar.css" rel="stylesheet">
         <script src="${pageContext.request.contextPath}/resources/assets/js/jquery.1.11.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/bootstrap.3.3.6/js/bootstrap.min.js"></script>
-
+        
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 
 
     </head>
@@ -61,15 +64,15 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="user-info-left">
-                                        <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="Profile Picture">
+                                        <img id="blah" src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="Profile Picture">
                                         <h2>${sessionScope.u.firstName} ${sessionScope.u.lastName}</h2>
                                         <div class="contact">
                                              
-                                            <form method="POST" enctype="multipart/form-data" action="uploadPic/${sessionScope.u.userId}">
+                                            <form method="POST" enctype="multipart/form-data" action="uploadPic${sessionScope.u.userId}">
                                             <p>
                                                 <span class="file-input btn btn-azure btn-file">
                                                     <!--<input  type="hidden" name="userId" path="userId" value="${sessionScope.u.userId}">-->
-                                                    Change Avatar <input type="file" name="file_link">
+                                                    Change Avatar <input type="file" name="file_link" onchange="readAvatarURL(this);">
                                                     
                                                 </span>
                                                 <input class="btn btn-azure" type="submit" value="Photo Update"/>
@@ -124,7 +127,7 @@
                                                 <option value="Jan">Jan</option>
                                                 <option value="Feb">Feb</option>
                                                 <option value="Mar">Mar</option>
-                                                <option value="App">App</option>
+                                                <option value="Apr">Apr</option>
                                                 <option value="May">May</option>
                                                 <option value="Jun">Jun</option>
                                                 <option value="Jul">Jul</option>
@@ -560,6 +563,21 @@
                 $('#list').hide();
 
             });
+            
+             function readAvatarURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         </script>
     </body>
 

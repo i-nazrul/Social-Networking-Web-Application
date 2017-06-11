@@ -35,14 +35,14 @@ public class ProfilePhotoAlbumController {
     @Autowired
     private ProfilePhotoAlbumServiceInterface ppasi;
     
-    @RequestMapping("/home1")
-    public String listUser(Users u) {
-        
-         ppasi.getProfilePhoto(u.getUserId());
-        return "home";
-    }
+//    @RequestMapping("/home1")
+//    public String listUser(Users u) {
+//        
+//         ppasi.getProfilePhoto(u.getUserId());
+//        return "home";
+//    }
     
-    @RequestMapping(value = "/uploadPic/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadPic{userId}", method = RequestMethod.POST)
     public String upload(@PathVariable("userId") Integer userId, @RequestParam("file_link") MultipartFile file_link, HttpSession session) throws IOException {
       
         

@@ -5,6 +5,7 @@
  */
 package com.social.controller;
 
+import com.social.entity.Post;
 import com.social.entity.ProfilePhotoAlbum;
 import com.social.entity.Users;
 import com.social.service.IUsersService;
@@ -71,6 +72,41 @@ public class LoginController {
         }
         ProfilePhotoAlbum ppa = cList2.get(0);
         session.setAttribute("ppa", ppa);
+        
+        // for all users
+        Session session3 = sessionFactory.getCurrentSession();
+        Query query3 = session3.createQuery("from Users");
+
+        List<Users> cList3 = query3.list();
+        cList3.toString();
+        for(Users au : cList3){
+            System.out.println("All Users : "+au.getUserId()+" "+au.getFirstName()+" "+au.getLastName()+" "+au.getEmail());
+        }
+        session.setAttribute("auList", cList3);
+        
+        // for all users picture
+        Session session4 = sessionFactory.getCurrentSession();
+        Query query4 = session4.createQuery("FROM ProfilePhotoAlbum p WHERE p.status=:status");
+        query4.setInteger("status", 1);
+
+        List<ProfilePhotoAlbum> cList4 = query4.list();
+        cList4.toString();
+        for(ProfilePhotoAlbum ppa2 : cList4){
+            System.out.println("All Users Photo: "+ppa2.getUserId()+" "+ppa2.getFileLink());
+        }
+        session.setAttribute("ppaList", cList4);
+        
+         // for user's posts
+        Session session5 = sessionFactory.getCurrentSession();
+        Query query5 = session5.createQuery("FROM Post p WHERE p.userId=:userId");
+        query5.setInteger("userId", user.getUserId());
+
+        List<Post> cList5 = query5.list();
+        cList2.toString();
+        for(Post p : cList5){
+            System.out.println("Login Controller: "+p.getUserId()+" "+p.getPostTitle());
+        }
+        session.setAttribute("pst", cList5);
          
         return new ModelAndView("home", "user-entity", user);
     }

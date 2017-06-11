@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -287,11 +292,14 @@
                 <div class="col-md-12">
                 <!-- post state form -->
                   <div class="box profile-info n-border-top">
-                    <form name="postForm" method="POST" ng-controller="PostController as postCtrl">
-                        <textarea class="form-control input-lg p-text-area" rows="2" ng-model="postCtrl.post.postContext" placeholder="Whats in your mind today?"></textarea>
+                      <c:url var="action" value="profilePostAdd"></c:url>
+                      <form:form method="post" action="${action}" commandName="post">
+                            <input class="form-control" type="hidden" name="userId" path="userId" value="${sessionScope.u.userId}">
+                          <input class="form-control input-lg p-text-area" name="postTitle" path="postTitle" placeholder="Write Title here"/>
+                          <textarea class="form-control input-lg p-text-area" rows="2" name="postContext" path="postContext" placeholder="Whats in your mind today?"></textarea>
                     
                     <div class="box-footer box-form">
-                        <button type="button" class="btn btn-azure pull-right" ng-click="postCtrl.addPost()">Post</button>
+                        <input type="submit"  class="btn btn-azure pull-right" value="Post"/>
                         <ul class="nav nav-pills">
                             <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                             <li><a href="#"><i class="fa fa-camera"></i></a></li>
@@ -299,38 +307,26 @@
                             <li><a href="#"><i class="fa fa-microphone"></i></a></li>
                         </ul>
                     </div>
-                   </form>
-                  </div><!-- end post state form -->
-<!--            <table>
-                <tr><th>ID </th> <th>First Name</th> <th>Last Name</th> <th>Email</th> <th>Password</th> <th>Date of Birth</th> <th>Sex</th> <th>Status</th></tr>
-                <tr ng-repeat="row in userCtrl.users">
-                    <td><span ng-bind="row.userId"></span></td>
-                    <td><span ng-bind="row.firstName"></span></td>
-                    <td><span ng-bind="row.lastName"></span></td>
-                    <td><span ng-bind="row.email"></span></td>
-                    <td><span ng-bind="row.password"></span></td>
-                    <td><span ng-bind="row.dob"></span></td>
-                    <td><span ng-bind="row.sex"></span></td>
-                    <td><span ng-bind="row.status"></span></td>
-                    <td>
-                        <input type="button" ng-click="userCtrl.deleteUsers(row.userId)" value="Delete"/>
-                        <input type="button" ng-click="userCtrl.editUsers(row.userId)" value="Edit"/>
-                        <span ng-if="userCtrl.flag === 'updated' && row.userId === userCtrl.updatedId" class="msg-success">Users successfully updated.</span> </td> 
-                </tr>	
-            </table>-->
+                    </form:form>
+                  </div>
+                <!-- end post state form -->
+
                   <!--   posts -->
+                  <c:forEach var="pst" items="${sessionScope.pst}">
                   <div class="box box-widget">
                     <div class="box-header with-border">
                       <div class="user-block">
-                        <img class="img-circle" src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="User Image">
-                        <span class="username"><a href="#">John Breakgrow jr.</a></span>
-                        <span class="description">Shared publicly - 7:30 PM Today</span>
+                        <img class="img-circle" src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${sessionScope.ppa.fileLink}" alt="User Image">
+                        <span class="username"><a href="#">${sessionScope.u.firstName} ${sessionScope.u.lastName}</a></span>
+                        <c:set var = "postTime" value = "${fn:substring(pst.postTime, 11, 16)}"></c:set>
+                        <c:set var = "postDate" value = "${fn:substring(pst.postTime, 0, 10)}"></c:set>
+                        <span class="description">Shared publicly -&nbsp Time: &nbsp${postTime} &nbsp Date: &nbsp ${postDate}</span>
                       </div>
                     </div>
 
                     <div class="box-body" style="display: block;">
-                      <img class="img-responsive show-in-modal" src="${pageContext.request.contextPath}/resources/img/Post/young-couple-in-love.jpg" alt="Photo">
-                      <p>I took this photo this morning. What do you guys think?</p>
+                      <img class="img-responsive show-in-modal" src="" alt="">
+                      <p>${pst.postContext}</p>
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
                       <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
                       <span class="pull-right text-muted">127 likes - 3 comments</span>
@@ -368,7 +364,8 @@
                         </div>
                       </form>
                     </div>
-                  </div><!--  end posts-->
+                  </div>
+                  </c:forEach><!--  end posts-->
 
 
                   <!-- post -->

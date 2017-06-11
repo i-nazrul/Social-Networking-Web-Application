@@ -92,11 +92,14 @@
                 <div class="col-md-12">
                 <!-- post state form -->
                   <div class="box profile-info n-border-top">
-                    <form name="postForm" method="POST" >
-                        <textarea class="form-control input-lg p-text-area" rows="2"  placeholder="Whats in your mind today?"></textarea>
+                      <c:url var="action" value="homePostAdd"></c:url>
+                      <form:form method="post" action="${action}" commandName="post">
+                            <input class="form-control" type="hidden" name="userId" path="userId" value="${sessionScope.u.userId}">
+                          <input class="form-control input-lg p-text-area" name="postTitle" path="postTitle" placeholder="Write Title here"/>
+                          <textarea class="form-control input-lg p-text-area" rows="2" name="postContext" path="postContext" placeholder="Whats in your mind today?"></textarea>
                     
                     <div class="box-footer box-form">
-                        <button type="submit"  class="btn btn-azure pull-right">Post</button>
+                        <input type="submit"  class="btn btn-azure pull-right" value="Post"/>
                         <ul class="nav nav-pills">
                             <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
                             <li><a href="#"><i class="fa fa-camera"></i></a></li>
@@ -104,8 +107,9 @@
                             <li><a href="#"><i class="fa fa-microphone"></i></a></li>
                         </ul>
                     </div>
-                    </form>
-                  </div><!-- end post state form -->
+                    </form:form>
+                  </div>
+                <!-- end post state form -->
 
                   <!--   posts -->
                   <div class="box box-widget">

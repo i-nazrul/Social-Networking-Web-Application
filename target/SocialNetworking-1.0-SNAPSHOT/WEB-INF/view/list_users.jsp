@@ -1,4 +1,8 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,42 +53,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-2.jpg" alt="">
-                                            <a href="#" class="user-link">John Doe</a>
-                                            <span class="user-subhead">Admin</span>
-                                        </td>
-                                        <td>
-                                            2013/08/08
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="label label-default">Inactive</span>
-                                        </td>
-                                        <td>
-                                            <a href="#">mila@kunis.com</a>
-                                        </td>
-                                        <td style="width: 20%;">
-                                            <a href="#" class="table-link success">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                            <a href="#" class="table-link danger">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-square fa-stack-2x"></i>
-                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach items="${sessionScope.auList}" var="x">
+                                        <tr>
+                                            <td>
+                                                <c:forEach var="p" items="${sessionScope.ppaList}">
+                                                    <c:if test="${p.userId eq x.userId}">
+                                                        <a class="pull-left" href="#">
+                                                            <img src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${p.fileLink}" alt=""  width="50px" height="50px">
+                                                        </a>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <a href="#" class="user-link">${x.firstName} ${x.lastName}</a>
+                                                <!--<span class="user-subhead">Admin</span>-->
+                                            </td>
+                                            <c:set var = "regDate" value = "${fn:substring(x.regDate, 0, 10)}"></c:set>
+                                                <td>
+                                                ${regDate}
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="label label-success">Active</span>
+                                            </td>
+                                            <td>
+                                                <a href="#">${x.email}</a>
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <a href="#" class="table-link success">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="table-link">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="table-link danger">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     <tr>
                                         <td>
                                             <img src="${pageContext.request.contextPath}/resources/img/Friends/guy-3.jpg" alt="">
