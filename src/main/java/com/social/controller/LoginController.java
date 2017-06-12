@@ -5,6 +5,7 @@
  */
 package com.social.controller;
 
+import com.social.entity.FriendRequest;
 import com.social.entity.Post;
 import com.social.entity.ProfilePhotoAlbum;
 import com.social.entity.Users;
@@ -42,6 +43,7 @@ public class LoginController {
     private IUsersService userService;
     @Autowired
     private SessionFactory sessionFactory;
+    private Integer userIdFrom;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -50,15 +52,14 @@ public class LoginController {
         return mav;
     }
 
-    
     @RequestMapping(value = "/home", method = RequestMethod.POST)
-    public ModelAndView loginProcess(WebRequest webRequest, 
+    public ModelAndView loginProcess(WebRequest webRequest,
             @ModelAttribute("user") Users user, HttpSession session) {
-       
+
         user = userService.loginUsers(user);
-         session.setAttribute("u", user);
-         
-         // for profile photo
+        session.setAttribute("u", user);
+
+        // for profile photo
         Session session2 = sessionFactory.getCurrentSession();
         Query query2 = session2.createQuery("FROM ProfilePhotoAlbum p WHERE p.userId=:userId and p.status=:status");
 
@@ -67,23 +68,23 @@ public class LoginController {
 
         List<ProfilePhotoAlbum> cList2 = query2.list();
         cList2.toString();
-        for(ProfilePhotoAlbum p : cList2){
-            System.out.println("Login Controller: "+p.getProfilePhotoId()+" "+p.getUserId()+" "+p.getFileLink()+" "+p.getStatus());
+        for (ProfilePhotoAlbum p : cList2) {
+            System.out.println("Login Controller: " + p.getProfilePhotoId() + " " + p.getUserId() + " " + p.getFileLink() + " " + p.getStatus());
         }
         ProfilePhotoAlbum ppa = cList2.get(0);
         session.setAttribute("ppa", ppa);
-        
+
         // for all users
         Session session3 = sessionFactory.getCurrentSession();
         Query query3 = session3.createQuery("from Users");
 
         List<Users> cList3 = query3.list();
         cList3.toString();
-        for(Users au : cList3){
-            System.out.println("All Users : "+au.getUserId()+" "+au.getFirstName()+" "+au.getLastName()+" "+au.getEmail());
+        for (Users au : cList3) {
+            System.out.println("All Users : " + au.getUserId() + " " + au.getFirstName() + " " + au.getLastName() + " " + au.getEmail());
         }
         session.setAttribute("auList", cList3);
-        
+
         // for all users picture
         Session session4 = sessionFactory.getCurrentSession();
         Query query4 = session4.createQuery("FROM ProfilePhotoAlbum p WHERE p.status=:status");
@@ -91,30 +92,72 @@ public class LoginController {
 
         List<ProfilePhotoAlbum> cList4 = query4.list();
         cList4.toString();
-        for(ProfilePhotoAlbum ppa2 : cList4){
-            System.out.println("All Users Photo: "+ppa2.getUserId()+" "+ppa2.getFileLink());
+        for (ProfilePhotoAlbum ppa2 : cList4) {
+            System.out.println("All Users Photo: " + ppa2.getUserId() + " " + ppa2.getFileLink());
         }
         session.setAttribute("ppaList", cList4);
-        
-         // for user's posts
+
+        // for user's posts
         Session session5 = sessionFactory.getCurrentSession();
-        Query query5 = session5.createQuery("FROM Post p WHERE p.userId=:userId");
+        Query query5 = session5.createQuery("FROM Post p WHERE p.userId=:userId order by postTime desc");
         query5.setInteger("userId", user.getUserId());
 
         List<Post> cList5 = query5.list();
         cList2.toString();
-        for(Post p : cList5){
-            System.out.println("Login Controller: "+p.getUserId()+" "+p.getPostTitle());
+        for (Post p : cList5) {
+            System.out.println("Login Controller: " + p.getUserId() + " " + p.getPostTitle());
         }
         session.setAttribute("pst", cList5);
-         
+
+        // for requested friend
+        Session session6 = sessionFactory.getCurrentSession();
+        Query query6 = session6.createQuery("FROM FriendRequest u WHERE u.userIdFrom=:userIdFrom and u.status=:status");
+
+        query6.setInteger("userIdFrom", user.getUserId());
+        query6.setInteger("status", 1);
+
+        List<FriendRequest> totalSentToList = query6.list();
+        totalSentToList.toString();
+
+        session.setAttribute("requestSent", totalSentToList);
+
+        //get friend requests
+        Session session7 = sessionFactory.getCurrentSession();
+        Query query7 = session7.createQuery("FROM FriendRequest u WHERE u.userIdTo=:userIdTo and u.status=:status order by friendRequstId desc");
+
+        query7.setInteger("userIdTo", user.getUserId());
+        query7.setInteger("status", 1);
+
+        List<FriendRequest> cList7 = query7.list();
+        cList7.toString();
+        List<Users> cList8=null;
+        for (FriendRequest f : cList7) {
+            userIdFrom = f.getUserIdFrom();
+            System.out.println("in " + userIdFrom);
+            Session session8 = sessionFactory.getCurrentSession();
+            Query query8 = session8.createQuery("FROM Users p WHERE p.userId=:userId");
+            query8.setInteger("userId", userIdFrom);
+            cList8=query8.list();
+            cList8.toString();
+            
+        }
+        for(Users uin: cList8){
+                System.out.println(uin.getLastName());
+            }
+        session.setAttribute("requests", cList7);
+
         return new ModelAndView("home", "user-entity", user);
     }
-    
-    @RequestMapping(value = "/logout", method=RequestMethod.GET)
-      public String logout(HttpSession session) {
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session, HttpServletResponse response) {
+        session.removeAttribute("requestSent");
+        session.removeAttribute("u");
         session.invalidate();
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setDateHeader("Expires", 0);
         System.out.println("session.invalidate()");
         return "redirect:/";
-      }
+    }
 }

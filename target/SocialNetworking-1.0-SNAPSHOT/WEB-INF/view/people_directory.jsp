@@ -76,34 +76,72 @@
 
             <div class="directory-info-row">
                 <div class="row">
-                    <c:forEach items="${sessionScope.auList}" var="x">
+                    <c:forEach items="${sessionScope.auList}" var="allUList">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="panel">
+                            <div class="panel" style="height: 210px">
                                 <div class="panel-body">
                                     <div class="media">
-                                        <c:forEach var="p" items="${sessionScope.ppaList}">
-                                            <c:if test="${p.userId eq x.userId}">
-                                        <a class="pull-left" href="#">
-                                            <img class="thumb media-object" src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${p.fileLink}" alt="">
-                                        </a>
-                                        </c:if>
+                                        <c:forEach var="profilePhoto" items="${sessionScope.ppaList}">
+                                            <c:if test="${profilePhoto.userId eq allUList.userId}">
+                                                <a class="pull-left" href="#">
+                                                    <img class="thumb media-object" src="${pageContext.request.contextPath}/resources/img/ProfilePhotoAlbum/${profilePhoto.fileLink}" alt="">
+                                                </a>
+                                            </c:if>
                                         </c:forEach>
                                         <div class="media-body">
-                                            <h4>${x.firstName} ${x.lastName}</h4>
+                                            <h4>${allUList.firstName} ${allUList.lastName}</h4>
                                             <ul class="social-links">
                                                 <li><a href="#"title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                                 <li><a href="#"title="Twitter"><i class="fa fa-twitter"></i></a></li>
                                                 <li><a href="#"title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
                                                 <li><a href="#"title="Skype"><i class="fa fa-skype"></i></a></li>
+                                                <li>
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.u.userId eq allUList.userId}">
+                                                            <input id="b" type="button" value="Send Friend Request" style="display:none;">
+                                                        </c:when>
+                                                        <c:otherwise>
+
+
+                                                            <c:forEach var="rs" items="${sessionScope.requestSent}">
+                                                                <c:if test="${rs.userIdTo eq allUList.userId}">
+                                                                    <c:set var="reqStatus" value="${allUList.userId}" scope="session"></c:set>
+                                                                    <c:set var="frReqId" value="${rs.friendRequstId}" scope="session"></c:set>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:choose>
+                                                                <c:when test="${allUList.userId eq sessionScope.reqStatus}">
+                                                                    <form:form commandName="fr" action="cancelRequest" method="post">
+                                                                        <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.frReqId}">
+                                                                        <input type="hidden" name="userIdFrom" path="usersByUserIdFrom" value="${sessionScope.u.userId}">
+                                                                        <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
+                                                                        <input type="hidden" name="status" path="status" value="0">
+                                                                        <input id="b" type="submit" value="Cancel Friend Request" style="margin-left: 20px;">
+                                                                    </form:form>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <form:form commandName="fr" action="sendRequest" method="post">
+                                                                        <input type="hidden" name="userIdFrom" path="usersByUserIdFrom" value="${sessionScope.u.userId}">
+                                                                        <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
+                                                                        <input type="hidden" name="status" path="status" value="1">
+                                                                        <input id="b" type="submit" value="Send Friend Request" style="margin-left: 20px;">
+                                                                    </form:form>
+                                                                </c:otherwise>      
+                                                            </c:choose>
+
+
+                                                        </c:otherwise>      
+                                                    </c:choose>
+                                                </li>
                                             </ul>
                                             <address>
-                                                <c:set var = "regDate" value = "${fn:substring(x.regDate, 0, 10)}"></c:set>
-                                                <strong>${x.email}</strong><br>
+                                                <c:set var = "regDate" value = "${fn:substring(allUList.regDate, 0, 10)}"></c:set>
+                                                <strong>${allUList.email}</strong><br>
                                                 From Dhaka, Bangladesh.<br>
                                                 Member Since  ${regDate} <br>
                                             </address>
 
-                                            <input id="b" type="button" value="Send Friend Request">
+
 
                                         </div>
                                     </div>

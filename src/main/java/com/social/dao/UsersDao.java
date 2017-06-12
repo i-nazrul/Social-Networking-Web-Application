@@ -5,7 +5,9 @@
  */
 package com.social.dao;
 
+import com.social.entity.ProfilePhotoAlbum;
 import com.social.entity.Users;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
@@ -24,10 +26,26 @@ public class UsersDao implements IUsersDao {
 
     @Autowired
     private SessionFactory sessionFactory;
+    
+    int userId;
 
     @Override
     public void addUser(Users user) {
         sessionFactory.getCurrentSession().save(user);
+        
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Users order by userId desc");
+        query.setMaxResults(1);
+        List<Users> cList = query.list();
+        cList.toString();
+        for(Users u: cList){
+           userId = u.getUserId();
+        }
+        addDefaultPhoto(new ProfilePhotoAlbum(userId, new Date(), "sample.png", 1));
+    }
+    
+    public void addDefaultPhoto(ProfilePhotoAlbum ppa) {
+        sessionFactory.getCurrentSession().save(ppa);
     }
 
     @Override

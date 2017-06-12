@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
   
@@ -598,6 +599,16 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn"><i class="fa fa-user-plus"></i><span style="color: red; font-weight: bold"> ${fn:length(sessionScope.requests)}</span></button>
+                                <div class="dropdown-content">
+                                    <c:forEach var="requests" items="${sessionScope.requests}">
+                                    <a href="user_detail">${requests.userIdFrom}</a>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </li>
                         <li class="actives"><a href="profile">Profile</a></li>
                         <li><a href="home">Home</a></li>
                         <li>
