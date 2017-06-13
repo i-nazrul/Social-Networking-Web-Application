@@ -105,26 +105,56 @@
 
                                                             <c:forEach var="rs" items="${sessionScope.requestSent}">
                                                                 <c:if test="${rs.userIdTo eq allUList.userId}">
-                                                                    <c:set var="reqStatus" value="${allUList.userId}" scope="session"></c:set>
-                                                                    <c:set var="frReqId" value="${rs.friendRequstId}" scope="session"></c:set>
+                                                                    <c:set var="sentReqStatus" value="${allUList.userId}" scope="session"></c:set>
+                                                                    <c:set var="sentfrReqId" value="${rs.friendRequstId}" scope="session"></c:set>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:forEach var="gr" items="${sessionScope.getRequests}">
+                                                                <c:if test="${gr.userId eq allUList.userId}">
+                                                                    <c:set var="getReqStatus" value="${allUList.userId}" scope="session"></c:set>
+                                                                    <c:set var="getFrReqId" value="${rs.friendRequstId}" scope="session"></c:set>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <c:forEach var="grId" items="${sessionScope.getRequestsId}">
+                                                                <c:if test="${grId.userId eq allUList.userId}">
+                                                                    <c:set var="getReqId" value="${grId.friendRequstId}" scope="session"></c:set>
                                                                 </c:if>
                                                             </c:forEach>
                                                             <c:choose>
-                                                                <c:when test="${allUList.userId eq sessionScope.reqStatus}">
+                                                                <c:when test="${allUList.userId eq sessionScope.sentReqStatus}">
                                                                     <form:form commandName="fr" action="cancelRequest" method="post">
-                                                                        <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.frReqId}">
+                                                                        <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.sentfrReqId}">
                                                                         <input type="hidden" name="userId" path="usersByUserId" value="${sessionScope.u.userId}">
                                                                         <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
                                                                         <input type="hidden" name="status" path="status" value="0">
-                                                                        <input id="b" type="submit" value="Cancel Friend Request" style="margin-left: 20px;">
+                                                                        <input id="b" type="submit" value="Cancel Friend Request" style="margin-left: 20px;" class="btn btn-danger">
                                                                     </form:form>
                                                                 </c:when>
-                                                                <c:otherwise>
-                                                                    <form:form commandName="fr" action="sendRequest" method="post">
+                                                                <c:when test="${allUList.userId eq sessionScope.getReqStatus}">
+                                                                    <div style="float:left; margin: 0px"> 
+                                                                        <form:form commandName="fr" action="acceptRequest" method="post">
+                                                                            <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.getReqId}">
+                                                                            <input type="hidden" name="userId" path="usersByUserId" value="${allUList.userId}">
+                                                                            <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${sessionScope.u.userId}">
+                                                                            <input type="hidden" name="status" path="status" value="2">
+                                                                            <input style="margin-left: 20px; margin-top:0px" type="submit" value="Accept" class="btn btn-azure">
+
+                                                                        </form:form></div>  
+                                                                    <div style="float:left; margin: 0px">
+                                                                        <form:form commandName="fr" action="rejectRequest" method="post">
+                                                                            <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.getReqId}">
+                                                                            <input type="hidden" name="userId" path="usersByUserId" value="${allUList.userId}">
+                                                                            <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${sessionScope.u.userId}">
+                                                                            <input type="hidden" name="status" path="status" value="0">
+                                                                            <input style="margin-left: 20px" type="submit" value="Reject" class="btn btn-danger">
+                                                                        </form:form> </div>   
+                                                                    </c:when>        
+                                                                    <c:otherwise>
+                                                                        <form:form commandName="fr" action="sendRequest" method="post">
                                                                         <input type="hidden" name="userId" path="usersByUserId" value="${sessionScope.u.userId}">
                                                                         <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
                                                                         <input type="hidden" name="status" path="status" value="1">
-                                                                        <input id="b" type="submit" value="Send Friend Request" style="margin-left: 20px;">
+                                                                        <input id="b" type="submit" value="Send Friend Request" style="margin-left: 20px; margin-top:0px" class="btn btn-azure">
                                                                     </form:form>
                                                                 </c:otherwise>      
                                                             </c:choose>

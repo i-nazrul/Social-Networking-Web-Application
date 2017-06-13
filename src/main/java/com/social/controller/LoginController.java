@@ -123,7 +123,7 @@ public class LoginController {
 
         //get friend requests
         Session session7 = sessionFactory.getCurrentSession();
-        Query query7 = session7.createQuery("from  Users  where userId in (select userId from FriendRequest where userIdTo=:userIdTo and status=:status) order by userId desc");
+        Query query7 = session7.createQuery("from  Users  where userId in (select userId from FriendRequest where userIdTo=:userIdTo and status=:status order by friendRequstId desc)");
 
         query7.setInteger("userIdTo", user.getUserId());
         query7.setInteger("status", 1);
@@ -136,6 +136,22 @@ public class LoginController {
             
         }
         session.setAttribute("getRequests", cList7);
+        
+        //get friend requests id
+        Session session9 = sessionFactory.getCurrentSession();
+        Query query9 = session9.createQuery("from FriendRequest where userIdTo=:userIdTo and status=:status order by friendRequstId desc");
+
+        query9.setInteger("userIdTo", user.getUserId());
+        query9.setInteger("status", 1);
+
+        List<FriendRequest> cList9 = query9.list();
+        cList9.toString();
+        for (FriendRequest f : cList9) {
+            System.out.println("friendRequstId " + f.getFriendRequstId()+" "+f.getUserId()+" "+f.getUserIdTo());
+          
+            
+        }
+        session.setAttribute("getRequestsId", cList9);
 
         return new ModelAndView("home", "user-entity", user);
     }

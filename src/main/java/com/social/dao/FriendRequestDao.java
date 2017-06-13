@@ -6,6 +6,7 @@
 package com.social.dao;
 
 import com.social.entity.FriendRequest;
+import com.social.entity.Users;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
@@ -29,8 +30,9 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
     @Override
     public List<FriendRequest> add(FriendRequest fr) {
         Session session2 = sessionFactory.getCurrentSession();
-        Query query2 = session2.createQuery("FROM FriendRequest u WHERE u.userIdTo=:userIdTo and u.status=:status");
+        Query query2 = session2.createQuery("FROM FriendRequest u WHERE u.userId=:userId and u.userIdTo=:userIdTo and u.status=:status");
 
+        query2.setInteger("userId", fr.getUserId());
         query2.setInteger("userIdTo", fr.getUserIdTo());
         query2.setInteger("status", 0);
 
@@ -39,10 +41,11 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
         if (cList2.size() > 0) {
             System.out.println("List Size " + cList2.size());
             Session session1 = sessionFactory.getCurrentSession();
-            Query query1 = session1.createQuery("UPDATE FriendRequest p SET p.status=:one Where p.status=:zero and p.userIdTo=:userIdTo");
+            Query query1 = session1.createQuery("UPDATE FriendRequest p SET p.status=:one Where p.status=:zero and p.userIdTo=:userIdTo and p.userId=:userId");
             query1.setInteger("one", 1);
             query1.setInteger("zero", 0);
             query1.setInteger("userIdTo", fr.getUserIdTo());
+            query1.setInteger("userId", fr.getUserId());
             query1.executeUpdate();
         } else {
             System.out.println("List Size " + cList2.size());
@@ -76,6 +79,29 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
 
         return cList;
     }
+    
+    @Override
+    public List<Users> reject(FriendRequest fr) {
+        sessionFactory.getCurrentSession().update(fr);
+
+        //get friend requests
+        Session session7 = sessionFactory.getCurrentSession();
+        Query query7 = session7.createQuery("from  Users  where userId in (select userId from FriendRequest where userIdTo=:userIdTo and status=:status order by friendRequstId desc)");
+
+        query7.setInteger("userIdTo", fr.getUserIdTo());
+        query7.setInteger("status", 1);
+
+        List<Users> cList7 = query7.list();
+        cList7.toString();
+        for (Users f : cList7) {
+            System.out.println("in " + f.getUserId()+" "+f.getFirstName()+" "+f.getLastName());
+          
+            
+        }
+
+        return cList7;
+        
+    }
 
     @Override
     public List<FriendRequest> getAll() {
@@ -90,5 +116,7 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
     @Override
     public void remove(Integer Id) {
     }
+
+    
 
 }

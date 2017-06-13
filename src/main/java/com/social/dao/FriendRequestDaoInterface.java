@@ -6,6 +6,7 @@
 package com.social.dao;
 
 import com.social.entity.FriendRequest;
+import com.social.entity.Users;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public interface FriendRequestDaoInterface {
     public List<FriendRequest> add(FriendRequest fr);
 
     public List<FriendRequest> update(FriendRequest fr);
+    
+    public List<Users> reject(FriendRequest fr);
 
     public List<FriendRequest> getAll();
 

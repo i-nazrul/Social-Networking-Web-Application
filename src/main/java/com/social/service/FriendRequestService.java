@@ -7,6 +7,7 @@ package com.social.service;
 
 import com.social.dao.FriendRequestDaoInterface;
 import com.social.entity.FriendRequest;
+import com.social.entity.Users;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class FriendRequestService implements FriendRequestServiceInterface{
     public List<FriendRequest> update(FriendRequest fr) {
         return frdi.update(fr);
     }
+    
+    @Override
+    public List<Users> reject(FriendRequest fr) {
+        return frdi.reject(fr);
+    }
 
     @Override
     public List<FriendRequest> getAll() {
@@ -44,5 +50,7 @@ public class FriendRequestService implements FriendRequestServiceInterface{
     @Override
     public void remove(Integer Id) {
     }
+
+    
     
 }

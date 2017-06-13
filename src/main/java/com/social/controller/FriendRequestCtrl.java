@@ -6,6 +6,7 @@
 package com.social.controller;
 
 import com.social.entity.FriendRequest;
+import com.social.entity.Users;
 import com.social.service.FriendRequestServiceInterface;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -32,15 +33,39 @@ public class FriendRequestCtrl {
         totalSentToList = frsi.add(fr);
 //        System.out.println("Ctrl: Friend request sent to "+totalSentToList.size()+" persons");
 //            System.out.println("Ctrl: "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+        session.removeAttribute("requestSent");
         session.setAttribute("requestSent", totalSentToList);
         return "people_directory";
     }
     
     @RequestMapping(value = "/cancelRequest", method = RequestMethod.POST)
-    public String update(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
+    public String updateCancel(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
         totalSentToList = frsi.update(fr);
-//        System.out.println("Ctrl: "+fr.getFriendRequstId()+" "+fr.getUserIdFrom()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+//        System.out.println("Ctrl: "+fr.getFriendRequstId()+" "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+        session.removeAttribute("requestSent");
         session.setAttribute("requestSent", totalSentToList);
         return "people_directory";
+    }
+    
+    @RequestMapping(value = "/acceptRequest", method = RequestMethod.POST)
+    public String updateAccept(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
+        System.out.println("acceptRequest: "+fr.getFriendRequstId()+" "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+        return "people_directory";
+    }
+    
+    @RequestMapping(value = "/rejectRequest", method = RequestMethod.POST)
+    public String updateReject(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
+//        System.out.println("acceptRequest: "+fr.getFriendRequstId()+" "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+        List<Users> getRequests = frsi.reject(fr);
+        session.setAttribute("getRequests", getRequests);
+        return "people_directory";
+    }
+    
+     @RequestMapping(value = "/rejectRequestHome", method = RequestMethod.POST)
+    public String updateRejectHome(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
+//        System.out.println("acceptRequest: "+fr.getFriendRequstId()+" "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
+        List<Users> getRequests = frsi.reject(fr);
+        session.setAttribute("getRequests", getRequests);
+        return "home";
     }
 }

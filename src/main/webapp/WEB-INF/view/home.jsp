@@ -622,7 +622,24 @@
                                                                 </c:if>
                                                             </c:forEach>
                                                         </td> 
-                                                        <td class="t">${getRequests.firstName}</td><td style="padding-left: 5px">${getRequests.lastName}</td><td class="t"><input type="button" value="Accept" class="pull-right"></td><td class="t"><input type="button" value="Cancel" class="pull-right"></td>
+                                                        <td class="t">${getRequests.firstName}</td><td style="padding-left: 5px">${getRequests.lastName}</td>
+                                                        <td class="t"><input style="margin-top: 0" type="button" value="Accept" class="btn btn-azure pull-right"></td>
+
+                                                        <td class="t">
+                                                            <c:forEach var="grId2" items="${sessionScope.getRequestsId}">
+                                                                <c:if test="${grId2.userId eq getRequests.userId}">
+                                                                    <c:set var="getReqId2" value="${grId2.friendRequstId}" scope="session"></c:set>
+                                                                    <c:set var="getReqFrom" value="${getRequests.userId}" scope="session"></c:set>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                            <form:form commandName="fr" action="rejectRequestHome" method="post">
+                                                                <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.getReqId2}">
+                                                                <input type="hidden" name="userId" path="usersByUserId" value="${sessionScope.getReqFrom}">
+                                                                <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${sessionScope.u.userId}">
+                                                                <input type="hidden" name="status" path="status" value="0">
+                                                                <input type="submit" value="Reject" class="btn btn-danger pull-right">
+                                                            </form:form> 
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </div>
