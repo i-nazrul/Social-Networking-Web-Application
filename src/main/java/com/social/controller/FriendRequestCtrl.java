@@ -31,6 +31,7 @@ public class FriendRequestCtrl {
     public String add(@ModelAttribute("fr") FriendRequest fr, BindingResult result, HttpSession session) {
         totalSentToList = frsi.add(fr);
 //        System.out.println("Ctrl: Friend request sent to "+totalSentToList.size()+" persons");
+//            System.out.println("Ctrl: "+fr.getUserId()+" "+fr.getUserIdTo()+" "+fr.getStatus());
         session.setAttribute("requestSent", totalSentToList);
         return "people_directory";
     }

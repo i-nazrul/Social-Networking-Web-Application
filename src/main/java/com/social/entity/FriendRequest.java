@@ -24,8 +24,8 @@ public class FriendRequest implements java.io.Serializable {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "friend_requst_id", unique = true, nullable = false)
     private Integer friendRequstId;
-    @Column(name = "user_id_from", nullable = false)
-    private Integer userIdFrom;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
     @Column(name = "user_id_to", nullable = false)
     private Integer userIdTo;
     @Column(name = "status", nullable = false)
@@ -34,8 +34,8 @@ public class FriendRequest implements java.io.Serializable {
     public FriendRequest() {
     }
 
-    public FriendRequest(Integer userIdFrom, Integer userIdTo, int status) {
-        this.userIdFrom = userIdFrom;
+    public FriendRequest(Integer userId, Integer userIdTo, int status) {
+        this.userId = userId;
         this.userIdTo = userIdTo;
         this.status = status;
     }
@@ -48,12 +48,12 @@ public class FriendRequest implements java.io.Serializable {
         this.friendRequstId = friendRequstId;
     }
 
-    public Integer getUserIdFrom() {
-        return userIdFrom;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserIdFrom(Integer userIdFrom) {
-        this.userIdFrom = userIdFrom;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getUserIdTo() {

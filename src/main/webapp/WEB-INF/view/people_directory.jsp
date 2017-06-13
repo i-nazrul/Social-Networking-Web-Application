@@ -113,7 +113,7 @@
                                                                 <c:when test="${allUList.userId eq sessionScope.reqStatus}">
                                                                     <form:form commandName="fr" action="cancelRequest" method="post">
                                                                         <input type="hidden" name="friendRequstId" path="friendRequstId" value="${sessionScope.frReqId}">
-                                                                        <input type="hidden" name="userIdFrom" path="usersByUserIdFrom" value="${sessionScope.u.userId}">
+                                                                        <input type="hidden" name="userId" path="usersByUserId" value="${sessionScope.u.userId}">
                                                                         <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
                                                                         <input type="hidden" name="status" path="status" value="0">
                                                                         <input id="b" type="submit" value="Cancel Friend Request" style="margin-left: 20px;">
@@ -121,7 +121,7 @@
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <form:form commandName="fr" action="sendRequest" method="post">
-                                                                        <input type="hidden" name="userIdFrom" path="usersByUserIdFrom" value="${sessionScope.u.userId}">
+                                                                        <input type="hidden" name="userId" path="usersByUserId" value="${sessionScope.u.userId}">
                                                                         <input type="hidden" name="userIdTo" path="usersByUserIdTo" value="${allUList.userId}">
                                                                         <input type="hidden" name="status" path="status" value="1">
                                                                         <input id="b" type="submit" value="Send Friend Request" style="margin-left: 20px;">

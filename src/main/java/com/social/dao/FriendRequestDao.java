@@ -50,9 +50,9 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
         }
 
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM FriendRequest u WHERE u.userIdFrom=:userIdFrom and u.status=:status");
+        Query query = session.createQuery("FROM FriendRequest u WHERE u.userId=:userId and u.status=:status");
 
-        query.setInteger("userIdFrom", fr.getUserIdFrom());
+        query.setInteger("userId", fr.getUserId());
         query.setInteger("status", fr.getStatus());
 
         List<FriendRequest> cList = query.list();
@@ -66,9 +66,9 @@ public class FriendRequestDao implements FriendRequestDaoInterface {
         sessionFactory.getCurrentSession().update(fr);
 
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM FriendRequest u WHERE u.userIdFrom=:userIdFrom and u.status=:status");
+        Query query = session.createQuery("FROM FriendRequest u WHERE u.userId=:userId and u.status=:status");
 
-        query.setInteger("userIdFrom", fr.getUserIdFrom());
+        query.setInteger("userId", fr.getUserId());
         query.setInteger("status", 1);
 
         List<FriendRequest> cList = query.list();

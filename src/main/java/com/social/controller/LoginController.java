@@ -43,7 +43,7 @@ public class LoginController {
     private IUsersService userService;
     @Autowired
     private SessionFactory sessionFactory;
-    private Integer userIdFrom;
+    
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
@@ -111,9 +111,9 @@ public class LoginController {
 
         // for requested friend
         Session session6 = sessionFactory.getCurrentSession();
-        Query query6 = session6.createQuery("FROM FriendRequest u WHERE u.userIdFrom=:userIdFrom and u.status=:status");
+        Query query6 = session6.createQuery("FROM FriendRequest u WHERE u.userId=:userId and u.status=:status");
 
-        query6.setInteger("userIdFrom", user.getUserId());
+        query6.setInteger("userId", user.getUserId());
         query6.setInteger("status", 1);
 
         List<FriendRequest> totalSentToList = query6.list();
@@ -123,28 +123,19 @@ public class LoginController {
 
         //get friend requests
         Session session7 = sessionFactory.getCurrentSession();
-        Query query7 = session7.createQuery("FROM FriendRequest u WHERE u.userIdTo=:userIdTo and u.status=:status order by friendRequstId desc");
+        Query query7 = session7.createQuery("from  Users  where userId in (select userId from FriendRequest where userIdTo=:userIdTo and status=:status) order by userId desc");
 
         query7.setInteger("userIdTo", user.getUserId());
         query7.setInteger("status", 1);
 
-        List<FriendRequest> cList7 = query7.list();
+        List<Users> cList7 = query7.list();
         cList7.toString();
-        List<Users> cList8=null;
-        for (FriendRequest f : cList7) {
-            userIdFrom = f.getUserIdFrom();
-            System.out.println("in " + userIdFrom);
-            Session session8 = sessionFactory.getCurrentSession();
-            Query query8 = session8.createQuery("FROM Users p WHERE p.userId=:userId");
-            query8.setInteger("userId", userIdFrom);
-            cList8=query8.list();
-            cList8.toString();
+        for (Users f : cList7) {
+            System.out.println("in " + f.getUserId()+" "+f.getFirstName()+" "+f.getLastName());
+          
             
         }
-        for(Users uin: cList8){
-                System.out.println(uin.getLastName());
-            }
-        session.setAttribute("requests", cList7);
+        session.setAttribute("getRequests", cList7);
 
         return new ModelAndView("home", "user-entity", user);
     }
